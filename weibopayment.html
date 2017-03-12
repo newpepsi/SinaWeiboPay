@@ -1,0 +1,933 @@
+<html xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; gbk">
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>微博支付v2.06</title>
+    <style>
+        p.MsoNormal {
+            text-align: justify;
+            font-weight: bold;
+        }
+
+        h1 {
+            text-align: justify;
+            line-height: 240%;
+            font-weight: bold;
+        }
+
+        table.MsoTableGrid {
+            text-align: justify;
+        }
+
+        #side-menu {
+            position: fixed;
+            top: 5px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="side-menu" class="col-md-2 col-sm-4">
+    <div class="list-group">
+        <a class="list-group-item" href="#s21">微博支付接口</a>
+        <a class="list-group-item" href="#s24">订单查询接口</a>
+        <a class="list-group-item" href="#s25">退款申请接口</a>
+        <a class="list-group-item" href="#s27">退款查询接口</a>
+        <a class="list-group-item" href="#s28">私信通知接口</a>
+    </div>
+</div>
+<div class="col-md-10 col-sm-8 col-md-offset-2 col-sm-offset-4">
+    <a name="s21"></a>
+
+    <h1>2.1 微博支付接口</h1>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><span>接口名称</span></p></td>
+            <td width="624" colspan="4"><p class="MsoNormal"><span>微博支付接口</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>API地址</span></p></td>
+            <td width="624" colspan="4"><p class="MsoNormal"> http://pay.sc.weibo.com/api/merchant/pay/cashier </p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>请求方式</span></p></td>
+            <td width="624" colspan="4"><p class="MsoNormal"><span>GET&nbsp;,&nbsp;POST</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数名称</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>是否必填</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>目前仅支持RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>签名内容</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>appkey</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商户的appkey</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>区分商户不同的业务</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商户微博id</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal">out_pay_id </p></td>
+            <td><p class="MsoNormal"><span>商户订单号</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>商户网站唯一编号，6-64位</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_url</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>异步通知地址</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>return_url</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>同步回调地址</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>支付完成时在浏览器带参数跳转的地址</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>subject</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商品名称</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>body</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商品描述</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>total_amount</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商品总价</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>以分为单位</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>expire</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>超时时间</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>extra</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>附加信息</span></p></td>
+            <td><p class="MsoNormal"><span>String</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td><p class="MsoNormal"><span>同步和异步回调时会带上</span></p></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><span>接口名称</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>同步返回结果</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>请求方式</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>GET</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>参数</span></p></td>
+            <td><p class="MsoNormal"><span>参数名称</span></p></td>
+            <td><p class="MsoNormal"><span>类型</span></p></td>
+            <td><p class="MsoNormal"><span>是否必填</span></p></td>
+            <td><p class="MsoNormal"><span>备注</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博支付订单号</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>&nbsp;是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户订单号</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>appkey</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户的appkey&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>用来区分商户不同的业务&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>buyer_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>买家微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>subject</span></b></p></td>
+            <td><p class="MsoNormal"><span>商品名称</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>body</span></b></p></td>
+            <td><p class="MsoNormal"><span>商品描述</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>total_amount</span></b></p></td>
+            <td><p class="MsoNormal"><span>商品总价</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>以分为单位</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>extra</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>附加信息</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_time</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>支付时间</span></p></td>
+            <td><p class="MsoNormal"><span>date</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>status</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>支付单状态</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>
+                <ul>
+                    <li>PAY_STATUS_PENDING-待支付</li>
+                    <li>PAY_STATUS_SUCCESS-已支付</li>
+                    <li>PAY_STATUS_CLOSED-已关闭</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><span>接口名称</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>异步回调支付结果</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>请求方式</span></p></td>
+            <td width="624" colspan="4"><p class="MsoNormal"><span>POST</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>参数</span></p></td>
+            <td><p class="MsoNormal"><span>参数名称</span></p></td>
+            <td><p class="MsoNormal"><span>类型</span></p></td>
+            <td><p class="MsoNormal"><span>是否必填</span></p></td>
+            <td><p class="MsoNormal"><span>备注</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>签名</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_id</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>通知ID</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_time</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>通知时间</span></p></td>
+            <td><p class="MsoNormal"><span>date</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_type</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>通知类型</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>PAY_STATUS_SUCCESS_B&nbsp;消费通知商家</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博支付订单号</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户订单号</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户微博UID</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>appkey</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户的appkey&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>用来区分商户不同的业务&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>buyer_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>买家微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>subject</span></b></p></td>
+            <td><p class="MsoNormal"><span>商品名称</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>body</span></b></p></td>
+            <td><p class="MsoNormal"><span>商品描述</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>total_amount</span></b></p></td>
+            <td><p class="MsoNormal"><span>商品总价</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>以分为单位</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>extra</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>附加信息</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_time</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>支付时间</span></p></td>
+            <td><p class="MsoNormal"><span>date</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>status</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>支付单状态</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>
+                <ul>
+                    <li>PAY_STATUS_PENDING-待支付</li>
+                    <li>PAY_STATUS_SUCCESS- 已支付</li>
+                    <li>PAY_STATUS_CLOSED–已关闭</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a name="s24"></a>
+
+    <h1>2.4 微博支付订单查询 </h1>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><span>接口名称</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>微博支付订单查询接口</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>API地址</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>http://pay.sc.weibo.com/api/merchant/pay/query</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>请求方式</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>POST</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数名称</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>是否必填</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>目前仅支持RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>签名内容</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商户微博id</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_pay_id</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>商户订单号</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td><p class="MsoNormal"><span>商户网站唯一编号，6-64位</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b><b></b></p></td>
+            <td><p class="MsoNormal"><span>微博支付单号</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td><p class="MsoNormal"><span>同步和异步回调时会带上</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><span>注意事项</span></p></td>
+            <td width="624" colspan="4">
+                <p class="MsoNormal"><span>pay_id&gt;out_pay_id&nbsp;两者不可同时为空</span>
+                </p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><b><span>接口名称</span></b><b></b></p></td>
+            <td colspan="2"><p class="MsoNormal"><span>微博支付订单查询接口</span><span>-查询结果对照表</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>查询结果</span></b><b></b></p></td>
+            <td colspan="2"><p class="MsoNormal"><span>查询结果</span><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>微博支付单号</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>商户订单号&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>商户微博UID&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>buyer_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>买家微博UID&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>subject</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>商品名称&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>body</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>商品描述&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>total_amount</span></b></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>商品总价，以分为单位&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_time</span></b></p></td>
+            <td><p class="MsoNormal"><span>date</span></p></td>
+            <td><p class="MsoNormal"><span>支付时间&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>status</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td>
+                <ul>
+                    <li>PAY_STATUS_PENDING-待支付</li>
+                    <li>PAY_STATUS_SUCCESS-已支付</li>
+                    <li>PAY_STATUS_CLOSED-已关闭</li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a name="s25"></a>
+
+    <h1>2.5 退款申请接口</h1>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数名称</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>是否必填</span></b></p></td>
+            <td colspan="2"><p class="MsoNormal"><b><span>参数说明</span></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td colspan="2"><p class="MsoNormal"><span>目前仅支持RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名内容</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"> &nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal">&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博支付单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal">&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>外部退款单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>最长64位</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_url</span></b></p></td>
+            <td><p class="MsoNormal"><span>回调地址&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>detail_data</span></b></p></td>
+            <td><p class="MsoNormal"><span>退款请求明细&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>
+                <p class="MsoNormal"><span>退款金额以分为单位。</span></p>
+
+                <p class="MsoNormal"><span>交易退款数据集格式：微博支付交易号（<font face="Calibri">pay_id)^</font><font
+                        face="宋体">退款金额</font><font face="Calibri">^</font></span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>成功后返回结果</span></b><b></b></p></td>
+            <td colspan="5">
+                <pre>{
+    "code": "100000",
+    "msg": "Success",
+    "data": {
+        "is_success": "T"，
+        "refund_id" : "****************" //微博支付退款单据号
+        }
+}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>失败后返回结果</span></b><b></b></p></td>
+            <td colspan="5">
+                <pre> { "code": 错误码," msg:"错误描述" } </pre>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h1>2.6 退款异步通知接口 </h1>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><b><span>接口说明</span></b><b></b></p></td>
+            <td colspan="3"><p class="MsoNormal"> 退款异步通知接口，收到后请返回&nbsp;success</p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>访问地址</span></b><b></b></p></td>
+            <td colspan="3"><p class="MsoNormal"><b><span>2.5中设置的notify_url</span></b><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数名称</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>目前仅支持RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名内容</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td colspan="2">&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>通知id&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td colspan="2">&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_time</span></b></p></td>
+            <td><p class="MsoNormal"><span>通知时间&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>date</span></p></td>
+            <td colspan="2">&nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>notify_type</span></b></p></td>
+            <td><p class="MsoNormal"><span>通知类型&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>PAY_REFUND_NOTIFY</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博支付单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td colspan="2"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博退款单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>外部退款单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td colspan="2"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>is_success</span></b></p></td>
+            <td><p class="MsoNormal"><span>退款结果&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>T-成功F-失败</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>error</span></b></p></td>
+            <td><p class="MsoNormal"><span>退款错误信息&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td colspan="2"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>refund_time</span></b></p></td>
+            <td><p class="MsoNormal"><span>退款时间&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>date</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a name="s27"></a>
+
+    <h1>2.7退款查询接口</h1>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"><b><span>接口说明</span></b><b></b></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>微博退款信息查询</span><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>API地址</span></b></p></td>
+            <td colspan="4"><p class="MsoNormal">http://pay.sc.weibo.com/api/merchant/pay/refund/query</p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>请求方式</span></b><b></b></p></td>
+            <td colspan="4"><p class="MsoNormal"><b><span>POST</span></b><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数名称</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>是否必填</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>目前仅支持RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal" align="justify"><b><span>sign</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名内容</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td valign="center"><p class="MsoNormal" align="justify"><b><span>seller_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td valign="center"><p class="MsoNormal" align="justify"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博支付单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td> 注1</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal" align="justify"><b><span>out_refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>外部退款单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td> 注1</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal" align="justify"><b><span>refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>微博退款单号&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td> 注1</td>
+        </tr>
+        <tr>
+            <td valign="center"><p class="MsoNormal" align="justify"><b><span>status</span></b></p></td>
+            <td><p class="MsoNormal"><span>退款状态&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>否</span></p></td>
+            <td>
+                <p class="MsoNormal">REFUND_STATUS_PENDING- 待退款 </p>
+
+                <p class="MsoNormal"> REFUND_STATUS_PROCESSING </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="156" valign="center">
+                <p class="MsoNormal" align="justify">
+                    <b><span>注意事项</span></b><b></b>
+                </p>
+            </td>
+            <td width="624" valign="center" colspan="4">
+                <p class="MsoNormal" align="justify"><span>pay_id<font face="宋体">、</font><font face="Calibri">out_refund_id</font><font
+                        face="宋体">、</font><font face="Calibri">refund_id</font><font face="宋体">不可都为空优先级：</font><font
+                        face="Calibri">refund_id&gt;out_refund_id&gt;pay_id</font></span></p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td><p class="MsoNormal"> 返回结果 </p></td>
+            <td colspan="2"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>微博退款单号&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>out_refund_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>商户退款单号&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>int</span></p></td>
+            <td><p class="MsoNormal"><span>微博支付单号&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>status</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td>
+                退款单状态
+                <ul>
+                    <li>REFUND_STATUS_PENDING-待退款</li>
+                    <li>REFUND_STATUS_PROCESSING 退款中</li>
+                    <li>REFUND_STATUS_SUCCESS-已退款</li>
+                    <li>REFUND_STATUS_FAIL–退款失败</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sub_status</span></b></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>退款单子状态&nbsp;</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>op_time</span></b></p></td>
+            <td><p class="MsoNormal"><span>timestamp</span></p></td>
+            <td><p class="MsoNormal"><span>操作时间&nbsp;</span></p></td>
+        </tr>
+        </tbody>
+    </table>
+    <a name="s28"></a>
+
+    <h1> 2.8 私信通知接口 </h1>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td>
+                <p class="MsoNormal"><b><span>接口名称</span></b><b></b></p>
+            </td>
+            <td colspan="4">
+                <p class="MsoNormal"><b><span>微博私信通知接口</span></b><b></b></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="MsoNormal"><b><span>API地址</span></b><b></b></p>
+            </td>
+            <td colspan="4">
+                <p class="MsoNormal"><span>http://pay.sc.weibo.com/api/merchant/message/send</span><b></b>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>请求方式</span></b><b></b></p></td>
+            <td colspan="4"><p class="MsoNormal"><b><span>POST,GET</span></b><b></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数名称</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>类型</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>是否必填</span></b></p></td>
+            <td><p class="MsoNormal"><b><span>参数说明</span></b></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名内容&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>sign_type</span></b></p></td>
+            <td><p class="MsoNormal"><span>签名类型</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td><p class="MsoNormal"><span>RSA</span></p></td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>支付单id&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>data</span></b></p></td>
+            <td><p class="MsoNormal"><span>发送内容</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>seller_id</span></b></p></td>
+            <td><p class="MsoNormal"><span>商户ID</span></p></td>
+            <td><p class="MsoNormal"><span>string</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
+            <td> &nbsp; </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>接口说明</span></b><b></b></p></td>
+            <td colspan="4">
+                <p>
+                    用户在每次支付完成之后，商户可以在指定范围内调⽤用此接口向用户发送私信，从而实现告知相关物流信息，服务信息等各种状态提醒的需求。私信通知规则：
+                </p>
+                <ol>
+                    <li>支付单状态成功</li>
+                    <li>每笔支付单只能发送5条私信并且一分钟只能发送一次</li>
+                    <li>发送私信必须在支付成功90天内。</li>
+                </ol>
+            </td>
+        </tr>
+        <tr>
+            <td><p class="MsoNormal"><b><span>请求返回</span></b><b></b></p></td>
+            <td colspan="4">
+                <pre>｛ code : "100000" msg: "操作成功" ｝ </pre>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
