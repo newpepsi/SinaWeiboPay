@@ -1,6 +1,6 @@
 <html xmlns:o="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; gbk">
+    <meta http-equiv="Content-Type" content="text/html;">
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <title>微博支付v2.06</title>
     <style>
@@ -44,15 +44,15 @@
         <tbody>
         <tr>
             <td><p class="MsoNormal"><span>接口名称</span></p></td>
-            <td width="624" colspan="4"><p class="MsoNormal"><span>微博支付接口</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>微博支付接口</span></p></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><span>API地址</span></p></td>
-            <td width="624" colspan="4"><p class="MsoNormal"> http://pay.sc.weibo.com/api/merchant/pay/cashier </p></td>
+            <td colspan="4"><p class="MsoNormal">http://pay.sc.weibo.com/api/merchant/pay/cashier</p></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><span>请求方式</span></p></td>
-            <td width="624" colspan="4"><p class="MsoNormal"><span>GET&nbsp;,&nbsp;POST</span></p></td>
+            <td colspan="4"><p class="MsoNormal"><span>GET，POST</span></p></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>参数</span></b><b></b></p></td>
@@ -168,7 +168,7 @@
             <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
             <td><p class="MsoNormal"><span>微博支付订单号</span></p></td>
             <td><p class="MsoNormal"><span>int</span></p></td>
-            <td><p class="MsoNormal"><span>&nbsp;是</span></p></td>
+            <td><p class="MsoNormal"><span>是</span></p></td>
             <td>&nbsp; </td>
         </tr>
         <tr>
@@ -180,21 +180,21 @@
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>seller_id</span></b></p></td>
-            <td><p class="MsoNormal"><span>商户微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>商户微博UID</span></p></td>
             <td><p class="MsoNormal"><span>int</span></p></td>
             <td><p class="MsoNormal"><span>是</span></p></td>
             <td> &nbsp; </td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>appkey</span></b></p></td>
-            <td><p class="MsoNormal"><span>商户的appkey&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>商户的appkey</span></p></td>
             <td><p class="MsoNormal"><span>string</span></p></td>
             <td><p class="MsoNormal"><span>是</span></p></td>
-            <td><p class="MsoNormal"><span>用来区分商户不同的业务&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>用来区分商户不同的业务</span></p></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>buyer_id</span></b></p></td>
-            <td><p class="MsoNormal"><span>买家微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>买家微博UID</span></p></td>
             <td><p class="MsoNormal"><span>int</span></p></td>
             <td><p class="MsoNormal"><span>是</span></p></td>
             <td>&nbsp; </td>
@@ -299,7 +299,7 @@
             <td><p class="MsoNormal"><span>通知类型</span></p></td>
             <td><p class="MsoNormal"><span>string</span></p></td>
             <td><p class="MsoNormal"><span>是</span></p></td>
-            <td><p class="MsoNormal"><span>PAY_STATUS_SUCCESS_B&nbsp;消费通知商家</span></p></td>
+            <td><p class="MsoNormal"><span>PAY_STATUS_SUCCESS_B，消费通知商家</span></p></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>pay_id</span></b></p></td>
@@ -324,14 +324,14 @@
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>appkey</span></b></p></td>
-            <td><p class="MsoNormal"><span>商户的appkey&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>商户的appkey</span></p></td>
             <td><p class="MsoNormal"><span>string</span></p></td>
             <td><p class="MsoNormal"><span>是</span></p></td>
-            <td><p class="MsoNormal"><span>用来区分商户不同的业务&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>用来区分商户不同的业务</span></p></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>buyer_id</span></b></p></td>
-            <td><p class="MsoNormal"><span>买家微博UID&nbsp;</span></p></td>
+            <td><p class="MsoNormal"><span>买家微博UID</span></p></td>
             <td><p class="MsoNormal"><span>int</span></p></td>
             <td><p class="MsoNormal"><span>是</span></p></td>
             <td>&nbsp; </td>
@@ -462,7 +462,22 @@
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>查询结果</span></b><b></b></p></td>
-            <td colspan="2"><p class="MsoNormal"><span>查询结果</span><b></b></p></td>
+            <td colspan="2"><pre>
+{
+    "code": "100000",
+    "msg": "操作成功",
+    "data": {
+        "pay_id": "123905516744088501",
+        "out_pay_id": "60003",
+        "seller_id": "1305672987",
+        "buyer_id": "1868447042",
+        "subject": "test",
+        "body": "",
+        "total_amount": "2",
+        "status": "PAY_STATUS_SUCCESS",
+        "pay_time": "2015-11-04 18:00:41"
+    }
+}</pre></td>
         </tr>
         <tr>
             <td><p class="MsoNormal"><b><span>参数</span></b></p></td>
