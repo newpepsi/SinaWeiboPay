@@ -11,6 +11,6 @@
 ###
 
 # 常见问题
-*Q：什么seller_id* 
+**Q：什么seller_id** 
 
-A：Seller_id 就是申请微博支付的所用的微博用户 user_id
+**A：Seller_id 就是申请微博支付的所用的微博用户 user_id**
